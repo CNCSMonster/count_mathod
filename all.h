@@ -7,7 +7,8 @@
 #include <conio.h>
 #include <mem.h>
 
-
+#include "mult.h"
+#include "mult.c"
 
 
 

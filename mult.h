@@ -3,6 +3,7 @@
     #define _MULT_H_ //那就引入头文件mult.h
 
 #include <mem.h>
+#include <math.h>
 
 
 //多项式最高项数
@@ -26,7 +27,7 @@ typedef struct mymult{
 举个例子，要获得1+3*x^2，则需要输入三个系数，0,1,2次项系数，
 则输入的double数组为[1,0,3],n为3
 */
-Mult mult_get(double* val,int n);
+Mult mult_get(double val[],int n);
 
 
 //创建一个相当于0的空白多项式
@@ -59,7 +60,7 @@ Mult mult_divi(Mult a,Mult b);
 
 
 //计算传入自变量x后的多项式式值
-double mult_get_value(double x);
+double mult_get_value(Mult mult,double x);
 
 //打印多项式,传入的x为自变量符号
 void mult_show(Mult mult,char x);
