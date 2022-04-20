@@ -7,6 +7,10 @@
 #include <conio.h>
 #include <mem.h>
 
+
+#include "pos.h"
+#include "pos.c"
+
 #include "mult.h"
 #include "mult.c"
 

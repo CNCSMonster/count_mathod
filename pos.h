@@ -9,7 +9,7 @@ typedef struct mypos{
 }Pos,*Posp;
 
 
-Pos pos_get(int x,int y);
+Pos pos_get(double x,double y);
 
 
 
