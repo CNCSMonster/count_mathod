@@ -1,3 +1,5 @@
+
+
 #include "ndc.h"
 
 
@@ -7,8 +9,11 @@
 Ndc ndc_get(Posp points,int n){
     //
     Ndc out;
-    out.mult=
-
+    out.mult=mult_zero();
+    for(int i=0;i<n;i++){
+        out.points[i]=points[i];
+    }
+    
 
     return out;
 }
@@ -30,3 +35,4 @@ void ndc_show(Ndc ndc,char x){
 double ndc_get_value(Ndc ndc,double x){
 
 }
+
