@@ -20,10 +20,12 @@
 
 //拉格朗日插值多项式结构体
 typedef struct mylglrc{
-    //多项式
-
-    //之前插入的点
-
+    //多项式组合
+    Mult mults[LGLR_MAX_N];
+    //之前插入的点的数组
+    Pos points[LGLR_MAX_N];
+    //之前插入的点的数量
+    int n;
 }Lglrc,*Lglrcp;
 
 
@@ -37,10 +39,19 @@ Lglrc lglrc_get(Posp points,int n);
 //拉格朗日插值多项式操作
 
 
-//往拉格朗日插值多项式中多插一个点
+//往拉格朗日插值多项式中多插一系列点获得新的拉格朗日多项式
+Lglrc lglrc_insert(Lglrc lglrc,Posp adds,int numOfAdds);
 
 
 //获取拉格朗日多项式信息
+
+//打印拉格朗日多项式
+void lglrc_show(Lglrc lglrc,char x);
+
+
+
+//根据自变量x的值，获得拉格朗日多项式的函数值
+double lglrc_getvalue(Lglrc lglrc,double x);
 
 
 

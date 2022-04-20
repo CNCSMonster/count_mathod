@@ -52,7 +52,8 @@ Mult mult_mult(Mult a,Mult b);
 //多项式除法
 Mult mult_divi(Mult a,Mult b);
 
-
+//多项式的数乘,mult乘以coe(coefficient)
+Mult mult_num_mult(Mult mult,double coe);
 
 
 

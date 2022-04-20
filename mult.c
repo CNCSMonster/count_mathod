@@ -110,6 +110,13 @@ Mult mult_divi(Mult a,Mult b){
     return out;
 }
 
+//多项式的数乘,mult乘以coe(coefficient)
+Mult mult_num_mult(Mult mult,double coe){
+    for(int i=0;i<mult.max;i++){
+        mult.val[i]*=coe;
+    }
+    return mult;
+}
 
 
 //获取多项式信息
@@ -127,6 +134,13 @@ double mult_get_value(Mult mult,double x){
 
 //打印多项式，系数打印时保留2位小数
 void mult_show(Mult mult,char x){
+
+    //特殊情况，多项式为0多项式时
+    if(mult.max==1){
+        printf("%.2Lf",mult.val[0]);
+        return;
+    }
+
     //first为1表示这个数是第一个有效项
     int first=1;    
     for(int i=0;i<mult.max;i++){

@@ -10,6 +10,9 @@
 #include "mult.h"
 #include "mult.c"
 
+#include "lglrc.h"
+#include "lglrc.c"
+
 
 
 #endif

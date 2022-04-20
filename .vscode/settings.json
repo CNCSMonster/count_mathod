@@ -44,7 +44,9 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
-        "menu.h": "c"
+        "menu.h": "c",
+        "mult.c": "cpp",
+        "lglrc.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
