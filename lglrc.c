@@ -16,7 +16,7 @@ Lglrc lglrc_get(Posp points,int n){
     }
     for(int i=0;i<out.n;i++){
         double a=out.points[i].y;
-        Mult add=mult_get(&a,1);
+        Mult add=mult_one();
         for(int j=0;j<out.n;j++){
             if(i==j){
                 continue;
@@ -62,7 +62,7 @@ Lglrc lglrc_insert(Lglrc lglrc,Posp adds,int numOfAdds){
     //增加新的项
     for(int i=lglrc.n;i<lglrc.n+numOfAdds;i++){
         double a=lglrc.points[i].y;
-        Mult add=mult_get(&a,1);
+        Mult add=mult_one();
         for(int j=0;j<lglrc.n+numOfAdds;j++){
             if(i==j){
                 continue;
