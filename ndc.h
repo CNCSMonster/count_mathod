@@ -8,7 +8,8 @@
 
 typedef struct myndc{
     Mult mult;
-    Posp points;
+    Pos points[MULT_MAX_N];
+    Mult co;    //用来帮助计算的项
     int n;
 }Ndc,*Ndcp;
 

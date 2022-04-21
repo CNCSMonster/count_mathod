@@ -7,13 +7,13 @@ int main(){
     //系数数组
     double coe[3];
     int n=3;
-    coe[0]=1;
+    coe[0]=0;
     coe[1]=1;
     coe[2]=0;
     Mult a=mult_get(coe,n);
-    coe[0]=0;
-    coe[1]=1;
-    coe[2]=2;
+    coe[0]=1;
+    coe[1]=3;
+    coe[2]=1;
     Mult b=mult_get(coe,n);
 
     
@@ -42,6 +42,14 @@ int main(){
     mult_show(mult_zero(),x);
     printf("\n1多项式为:");
     mult_show(mult_one(),x);
+
+
+    //测试多项式求值
+    printf("\n多项式");
+    mult_show(a,x);
+    printf("在x=3的时候的值为:%.2Lf",mult_get_value(a,3));
+    printf("\n多项式");
+
 
     getch();
     return 0;

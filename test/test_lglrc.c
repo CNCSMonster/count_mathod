@@ -11,9 +11,18 @@ int main(){
     // points[5]=pos_get();
     // points[6]=pos_get();
     // points[7]=pos_get();
-    Lglrc lglrc=lglrc_get(points,3);
+    Lglrc lglrc=lglrc_get(points,2);
     char x='x';
     lglrc_show(lglrc,x);
+
+    printf("\n新加入一个点(2,0)后\n");
+    lglrc=lglrc_insert(lglrc,&points[2],1);
+    lglrc_show(lglrc,x);
+
+
+
+
+
 
     getchar();
     return 0;

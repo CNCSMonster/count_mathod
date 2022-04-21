@@ -15,9 +15,13 @@ Mult mult_get(double val[],int n){
     }
     out.max=n;
     //确定多项式的最高项
-    for(int i=out.max-1;i>0;i--){
-        if(fabs(out.val[i])<MULT_NEAR_ZERO){
-            out.max=i;
+    for(int i=out.max-1;i>=0;i--){
+        if(i==0){
+            out.max=1;
+            break;
+        }
+        if(fabs(out.val[i])>=MULT_NEAR_ZERO){
+            out.max=i+1;
             break;
         }
     }
@@ -57,9 +61,13 @@ Mult mult_add(Mult a,Mult b){
         out.val[i]=a.val[i]+b.val[i];
     }
     //确定多项式的最高项
-    for(int i=out.max-1;i>0;i--){
-        if(fabs(out.val[i])<MULT_NEAR_ZERO){
-            out.max=i;
+    for(int i=out.max-1;i>=0;i--){
+        if(i==0){
+            out.max=1;
+            break;
+        }
+        if(fabs(out.val[i])>=MULT_NEAR_ZERO){
+            out.max=i+1;
             break;
         }
     }
@@ -75,7 +83,11 @@ Mult mult_minus(Mult a,Mult b){
         out.val[i]=a.val[i]-b.val[i];
     }
     //确定多项式的最高项
-    for(int i=out.max-1;i>0;i--){
+    for(int i=out.max-1;i>=0;i--){
+        if(i==0){
+            out.max=1;
+            break;
+        }
         if(fabs(out.val[i])>=MULT_NEAR_ZERO){
             out.max=i+1;
             break;
@@ -95,9 +107,13 @@ Mult mult_mult(Mult a,Mult b){
         }
     }
     //确定多项式的最高项
-    for(int i=out.max-1;i>0;i--){
-        if(fabs(out.val[i])<MULT_NEAR_ZERO){
-            out.max=i;
+    for(int i=out.max-1;i>=0;i--){
+        if(i==0){
+            out.max=1;
+            break;
+        }
+        if(fabs(out.val[i])>=MULT_NEAR_ZERO){
+            out.max=i+1;
             break;
         }
     }
@@ -115,6 +131,17 @@ Mult mult_num_mult(Mult mult,double coe){
     for(int i=0;i<mult.max;i++){
         mult.val[i]*=coe;
     }
+     //确定多项式的最高项
+    for(int i=mult.max-1;i>=0;i--){
+        if(i==0){
+            mult.max=1;
+            break;
+        }
+        if(fabs(mult.val[i])>=MULT_NEAR_ZERO){
+            mult.max=i+1;
+            break;
+        }
+    }
     return mult;
 }
 
@@ -126,8 +153,8 @@ Mult mult_num_mult(Mult mult,double coe){
 double mult_get_value(Mult mult,double x){
     double out=0;
     for(int i=0;i<mult.max;i++){
-        double key=pow(x,i);
-        out+=key*mult.val[i];
+        double coe=pow(x,i);
+        out+= coe*mult.val[i];
     }
     return out;
 }

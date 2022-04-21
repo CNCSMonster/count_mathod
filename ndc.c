@@ -9,27 +9,47 @@
 Ndc ndc_get(Posp points,int n){
     //
     Ndc out;
-    out.mult=mult_zero();
+    if(n<=0){
+        printf("输入参数错误\n");
+        return out;
+    }
     for(int i=0;i<n;i++){
         out.points[i]=points[i];
     }
     out.n=n;
+    double st=points[0].y;
+    out.mult=mult_get(&st,1);
+    double ssst[2];
+    ssst[0]=-points[0].x;
+    ssst[1]=1;
+    Mult co=mult_get(ssst,2);
 
-    Mult a=mult_one();  //用来记录中间部分
-    for(int i=0;i<out.n;i++){
-        double tt[2];
-        tt[0]=1-points[i].x;
-        tt[1]=1;
-        Mult term=mult_get(tt,2);
-        term=mult_num_mult(term,points[i].y-mult_get_value(out.mult,points[i].x));
-        term=mult_mult(term,a);
-        //更新a
-        tt[0]=-points[i].x;
-        tt[1]=1;
-        a=mult_mult(a,mult_get(tt,2));
-        //更新out.mult
-        out.mult=mult_add(out.mult,term);
+
+
+    for(int i=1;i<out.n;i++){
+        
+        //当加入第i个项时，
+        //新加入的项为：（Yi - Fi-1(Xi) )(x- Xi + 1)(x - Xi-1 )...(x-X0)
+        //其中Fi-1为加入i点前的牛顿插值多项式函数，Fi-1(Xi)为代入Xi后它的值
+        double x=out.points[i].x;
+        double y=out.points[i].y;
+        
+        double before=mult_get_value(out.mult,x);
+
+        
+        Mult add=mult_num_mult(co,(y-before)/mult_get_value(co,x));
+
+        //加入新项
+        out.mult=mult_add(out.mult,add);
+
+        //刷新co
+        double coe[2];
+        coe[0]=-x;
+        coe[1]=1;
+        co=mult_mult(co,mult_get(coe,2));
+
     }
+    out.co=co;
     return out;
 }
 
@@ -45,38 +65,37 @@ Ndc ndc_insert(Ndc ndc,Posp adds,int numOfAdds){
         return ndc; //返回输入的多项式的复制
     }
 
-    
-
-    Mult a=mult_one();  //用来记录中间部分
-    for(int i=0;i<ndc.n;i++){
-        double tt[2];
-        tt[0]=-ndc.points[i].x;
-        tt[1]=1;
-        a=mult_mult(a,mult_get(tt,2));
+    for(int i=0;i<numOfAdds;i++){
+        ndc.points[i+ndc.n]=adds[i];
     }
 
-
-    for(int i=ndc.n;i<ndc.n+numOfAdds;i++){
-        //在多项式记录的点中补充后面的点
-        ndc.points[i]=adds[i-ndc.n];
-
-        //进行新加入的项的计算
-        double tt[2];
-        tt[0]=1-points[i].x;
-        tt[1]=1;
-        Mult term=mult_get(tt,2);
-        term=mult_num_mult(term,points[i].y-mult_get_value(ndc.mult,points[i].x));
-        term=mult_mult(term,a);
-        //更新a
-        tt[0]=-points[i].x;
-        tt[1]=1;
-        a=mult_mult(a,mult_get(tt,2));
-
-        //把新的项加入到多项式中
-        ndc.mult=mult_add(ndc.mult,term);
-    }
     ndc.n+=numOfAdds;
 
+    Mult co=ndc.co;
+
+    for(int i=ndc.n-numOfAdds;i<ndc.n;i++){
+        
+        //当加入第i个项时，
+        //新加入的项为：（Yi - Fi-1(Xi) )(x- Xi + 1)(x - Xi-1 )...(x-X0)
+        //其中Fi-1为加入i点前的牛顿插值多项式函数，Fi-1(Xi)为代入Xi后它的值
+        double x=ndc.points[i].x;
+        double y=ndc.points[i].y;
+        
+        double before=mult_get_value(ndc.mult,x);
+
+        Mult add=mult_num_mult(co,(y-before)/mult_get_value(co,x));
+
+        //加入新项
+        ndc.mult=mult_add(ndc.mult,add);
+
+        //刷新co
+        double coe[2];
+        coe[0]=-x;
+        coe[1]=1;
+        co=mult_mult(co,mult_get(coe,2));
+
+    }
+    ndc.co=co;
     return ndc;
 }
 
@@ -85,7 +104,7 @@ Ndc ndc_insert(Ndc ndc,Posp adds,int numOfAdds){
 
 //打印多项式
 void ndc_show(Ndc ndc,char x){
-    
+
     mult_show(ndc.mult,x);
 }
 
