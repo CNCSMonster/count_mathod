@@ -17,6 +17,8 @@
 #include "lglrc.h"
 #include "lglrc.c"
 
+#include "ndc.h"
+#include "ndc.c"
 
 
 #endif
