@@ -55,6 +55,9 @@ Mult mult_divi(Mult a,Mult b);
 //多项式的数乘,mult乘以coe(coefficient)
 Mult mult_num_mult(Mult mult,double coe);
 
+//多项式求导,获得多项式的导数
+Mult mult_dao(Mult mult);
+
 
 
 //获取多项式信息

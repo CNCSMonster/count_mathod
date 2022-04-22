@@ -37,6 +37,12 @@ int main(){
     printf("\n\n测试多项式的数乘:\n%.2Lf*a=",c);
     mult_show(mult_num_mult(a,c),x);
 
+    printf("\n测试多项式求导:\n");
+    printf("多项式b=");
+    mult_show(b,x);
+    printf("的导数为：");
+    mult_show(mult_dao(b),x);
+
 
     printf("\n0多项式为:");
     mult_show(mult_zero(),x);
@@ -49,6 +55,9 @@ int main(){
     mult_show(a,x);
     printf("在x=3的时候的值为:%.2Lf",mult_get_value(a,3));
     printf("\n多项式");
+
+
+
 
 
     getch();

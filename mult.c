@@ -146,6 +146,19 @@ Mult mult_num_mult(Mult mult,double coe){
 }
 
 
+//多项式求导,获得多项式的导数
+Mult mult_dao(Mult mult){
+    Mult out;
+    memset(out.val,0,sizeof(out.val));
+    out.max=mult.max-1;
+    for(int i=1;i<mult.max;i++){
+        out.val[i-1]=mult.val[i]*i;
+    }
+    return out;
+}
+
+
+
 //获取多项式信息
 
 
