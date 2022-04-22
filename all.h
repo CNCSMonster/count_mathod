@@ -20,5 +20,11 @@
 #include "ndc.h"
 #include "ndc.c"
 
+#include "ndd.c"
+#include "ndd.h"
+
+#include "func.h"
+#include "func.c"
+
 
 #endif
