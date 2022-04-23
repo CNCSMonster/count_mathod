@@ -19,12 +19,13 @@ double ndd_count(Func func,double st,double w1,double w2,int* ifok){
 
 //获得func在x处的函数值
 double ndd_yuan(Func func ,double x){
-
+    return func_get_value(func,x);
 }
 
 //获得func导数在x处的函数值
 double ndd_dao(Func func,double x){
-
+    Func fdao=func_dao(func);
+    return func_get_value(fdao,x);
 }
 
 
