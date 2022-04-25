@@ -4,7 +4,7 @@
 //通过ifok来记录是否成功
 double ndd_count(Func func,double st,double w1,double w2,int* ifok){
     do{
-        if(fabs(ndd_dao(func,st))<w1){
+        if(fabs(ndd_dao(func,st))<w2){
             *ifok=0;
             break;
         }
